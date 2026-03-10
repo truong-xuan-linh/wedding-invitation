@@ -104,6 +104,17 @@
     font-size: 2rem;
     font-family: Text;
     font-weight: 500;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(98, 5, 14, 0.12);
+    }
+
+    &:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
   }
 
   .iwish {
@@ -120,6 +131,39 @@
     font-weight: bold;
     cursor: pointer;
     overflow-y: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.2s ease;
+
+    &:hover:not(:disabled) {
+      transform: scale(1.025) !important;
+      box-shadow: 0 4px 16px rgba(98, 5, 14, 0.15);
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.97) !important;
+    }
+  }
+
+  .form-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(51, 51, 51, 0.25);
+    border-top-color: #333;
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+    margin-right: 8px;
+    flex-shrink: 0;
   }
 
   @keyframes slideUp {
@@ -224,6 +268,56 @@
   align-items: center;
   z-index: 10;
   scroll-behavior: none;
+}
+
+// ── Success panel ────────────────────────────────────────────
+
+.success-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px 40px;
+  gap: 14px;
+  text-align: center;
+  width: 100%;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.28);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  75% {
+    transform: scale(1.2);
+  }
+}
+
+.success-heart {
+  font-size: 7rem;
+  color: #e8637a;
+  line-height: 1;
+  animation: heartbeat 1.2s ease-in-out infinite;
+  display: block;
+}
+
+.success-title {
+  font-family: Brush, cursive;
+  font-size: 4rem;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.success-subtitle {
+  font-family: StyleScript, cursive;
+  font-size: 2rem;
+  color: #666;
+  line-height: 1.5;
 }
 
 @media (max-width: 480px) {

@@ -57,6 +57,34 @@ function FloatingWishes() {
     return () => clearInterval(id);
   }, [wishes]);
 
+  // listen for a newly posted wish and immediately spawn it as a bubble
+  useEffect(() => {
+    const handleNewWish = (e) => {
+      const wish = e.detail;
+      if (!wish) return;
+
+      // prepend to pool so it can cycle through later too
+      wishesRef.current = [wish, ...wishesRef.current];
+
+      const x = 4 + Math.random() * 68;
+      const rotStart = (Math.random() - 0.5) * 6;
+      const rotEnd = (Math.random() - 0.5) * 8;
+      const key = keyRef.current++;
+
+      setBubbles((prev) => {
+        const capped = prev.length >= MAX_ACTIVE ? prev.slice(1) : prev;
+        return [...capped, { key, wish, x, rotStart, rotEnd }];
+      });
+
+      setTimeout(() => {
+        setBubbles((prev) => prev.filter((b) => b.key !== key));
+      }, FLOAT_DURATION);
+    };
+
+    window.addEventListener("wishPosted", handleNewWish);
+    return () => window.removeEventListener("wishPosted", handleNewWish);
+  }, []);
+
   // remove a bubble after its animation ends
   const handleAnimEnd = (key) => {
     setBubbles((prev) => prev.filter((b) => b.key !== key));

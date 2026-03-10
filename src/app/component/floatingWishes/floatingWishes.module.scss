@@ -120,6 +120,10 @@
   50% { opacity: 1; transform: scale(1.25); }
 }
 
+.bubble:hover {
+  animation-play-state: paused;
+}
+
 .expanded {
   width: min(280px, 72vw);
   z-index: 10;

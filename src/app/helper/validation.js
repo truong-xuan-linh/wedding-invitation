@@ -1,19 +1,24 @@
 export default function validation({ name, wish, isAttend }) {
   if (name.trim() === "") {
-    alert("Vui lòng cho chúng tôi biết tên hoặc nickname của bạn !");
-    return false;
-  } else if (name.trim().length > 30) {
-    alert("Vui lòng nhập tên của bạn dưới 30 kí tự");
-    return false;
+    return {
+      isValid: false,
+      message: "Vui lòng cho chúng tôi biết tên hoặc nickname của bạn!",
+    };
+  }
+  if (name.trim().length > 30) {
+    return {
+      isValid: false,
+      message: "Vui lòng nhập tên của bạn dưới 30 ký tự.",
+    };
   }
   if (wish.trim() === "") {
-    alert("Vui lòng nhập lời chúc của bạn ! ");
-    return false;
+    return { isValid: false, message: "Vui lòng nhập lời chúc của bạn!" };
   }
   if (isAttend === null) {
-    alert("Hãy cho chúng tôi biết bạn có đến tham dự hay không !");
-    return false;
+    return {
+      isValid: false,
+      message: "Hãy cho chúng tôi biết bạn có đến tham dự hay không!",
+    };
   }
-
-  return true;
+  return { isValid: true, message: "" };
 }

@@ -1,0 +1,117 @@
+.container {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 10px;
+  z-index: 99999;
+  pointer-events: none;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+}
+
+.toast {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px 17px;
+  border-radius: 18px;
+  min-width: 260px;
+  max-width: 380px;
+  pointer-events: auto;
+  cursor: pointer;
+  overflow: hidden;
+  border: 1.5px solid transparent;
+
+  &.success {
+    background: rgba(255, 248, 250, 0.98);
+    border-color: rgba(232, 99, 122, 0.35);
+    box-shadow:
+      0 10px 40px rgba(232, 99, 122, 0.2),
+      0 2px 8px rgba(0, 0, 0, 0.06);
+
+    .icon {
+      color: #e8637a;
+    }
+    .progress {
+      background: linear-gradient(90deg, #e8637a, #f4a7b9);
+    }
+  }
+
+  &.error {
+    background: rgba(255, 247, 247, 0.98);
+    border-color: rgba(192, 30, 30, 0.28);
+    box-shadow:
+      0 10px 40px rgba(192, 30, 30, 0.15),
+      0 2px 8px rgba(0, 0, 0, 0.06);
+
+    .icon {
+      color: #c01e1e;
+    }
+    .progress {
+      background: #c01e1e;
+    }
+  }
+
+  &.info {
+    background: rgba(255, 253, 248, 0.98);
+    border-color: rgba(98, 5, 14, 0.2);
+    box-shadow:
+      0 10px 40px rgba(98, 5, 14, 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.06);
+
+    .icon {
+      color: #62050e;
+    }
+    .progress {
+      background: #62050e;
+    }
+  }
+}
+
+.icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.message {
+  font-family: Text, sans-serif;
+  font-size: 1.45rem;
+  color: #333;
+  line-height: 1.45;
+  flex: 1;
+}
+
+@keyframes shrink {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  border-radius: 0 0 18px 18px;
+  animation: shrink linear forwards;
+}
+
+@media (max-width: 480px) {
+  .container {
+    bottom: 16px;
+  }
+
+  .toast {
+    min-width: 0;
+    width: calc(100vw - 32px);
+  }
+}
