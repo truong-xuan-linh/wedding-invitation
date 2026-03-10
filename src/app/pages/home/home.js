@@ -16,6 +16,7 @@ import Game from "@/app/component/game";
 import { MultiContext } from "@/app/context";
 import Disk from "@/app/component/disk";
 import Timer from "@/app/component/timer";
+import FloatingWishes from "@/app/component/floatingWishes";
 
 const cx = classNames.bind(styles);
 export default function Home() {
@@ -48,6 +49,7 @@ export default function Home() {
   }, [isOpen]);
   return (
     <div className={cx("wrapper")}>
+      <FloatingWishes />
       <Disk />
       <Intro handleOpen={handleOpenInvitation} name={name} />
       {isOpen && (
